@@ -18,6 +18,13 @@ def convert_to_binary(list):
 	"""Converts hex line to binary, takes in a list of hex commands
 	and returns a list of those lines converted to binary.
 
-	>>> l = convert_to_binary()
-
+	>>> hex = read_file("doctests/add.hex")
+	>>> bin = convert_to_binary(hex)
+	>>> bin[0]
+	00111100000010000000000000110101
+	>>> bin[3]
+	00000001001010000101000000100000
 	"""
+	to_return = []
+	for elem in list:
+		
