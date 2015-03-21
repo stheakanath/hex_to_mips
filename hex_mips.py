@@ -21,10 +21,13 @@ def convert_to_binary(list):
 	>>> hex = read_file("doctests/add.hex")
 	>>> bin = convert_to_binary(hex)
 	>>> bin[0]
-	00111100000010000000000000110101
+	'00111100000010000000000000110101'
 	>>> bin[3]
-	00000001001010000101000000100000
+	'00000001001010000101000000100000'
 	"""
 	to_return = []
 	for elem in list:
-		
+		converted = ''.join('{0:04b}'.format(int(c, 16)) for c in elem)
+		f = converted.zfill(32)
+		to_return.append(f)
+	return to_return
