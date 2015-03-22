@@ -57,6 +57,8 @@ def check_inst_type(str0):
 		rt = int(str0[11:16], 2)
 		rd = int(str0[16:21], 2)
 		shamt = str(int(str0[21:26], 2))
+		if function == 'jr':
+			return function + " " + registers.get(rs)
 		if function != 'sll' and function != 'srl':
 			return function + " " + registers.get(rd) + ", " + registers.get(rs) + ", " + registers.get(rt)
 		return function + " " + registers.get(rd) + ", " + shamt
