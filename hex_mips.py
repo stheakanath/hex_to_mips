@@ -26,8 +26,7 @@ def convert_to_signed(str0):
 				str1 += '0'
 			else:
 				str1 += '1'
-		num = -1 * (int(str1, 2) + 1)
-		return str(num)
+		return = str(-1 * (int(str1, 2) + 1))
 	return str(int(str0, 2))
 
 def convert_to_binary(list):
@@ -44,14 +43,12 @@ def convert_to_binary(list):
 	to_return = []
 	for elem in list:
 		converted = ''.join('{0:04b}'.format(int(c, 16)) for c in elem)
-		f = converted.zfill(32)
-		to_return.append(f)
+		to_return.append(converted.zfill(32))
 	return to_return
 
 def check_inst_type(str0):
 	"""Takes in a binary string and calls the certain function that returns
 	a correct instruciton type.
-
 	"""
 	opcode = int(str0[0:6], 2)
 	if opcode == 0:
@@ -62,8 +59,7 @@ def check_inst_type(str0):
 		shamt = str(int(str0[21:26], 2))
 		if function != 'sll' and function != 'srl':
 			return function + " " + registers.get(rd) + ", " + registers.get(rs) + ", " + registers.get(rt)
-		else:
-			return function + " " + registers.get(rd) + ", " + shamt
+		return function + " " + registers.get(rd) + ", " + shamt
 	elif opcode == 2 or opcode == 3:
 		addr = str(int(str0[6:32], 2))
 		return j_type.get(opcode) + addr
