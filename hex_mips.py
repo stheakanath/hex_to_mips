@@ -19,6 +19,7 @@ def read_file(fname):
 	return lines
 
 def convert_to_signed(str0):
+	"""Converts binary number to twos compliment signed integer"""
 	if str0[0] == '1':
 		str1 = ""
 		for letter in str0:
@@ -48,8 +49,7 @@ def convert_to_binary(list):
 
 def check_inst_type(str0):
 	"""Takes in a binary string and calls the certain function that returns
-	a correct instruciton type.
-	"""
+	a correct instruciton type."""
 	opcode = int(str0[0:6], 2)
 	if opcode == 0:
 		function = r_type_fx.get(int(str0[26:32], 2))
@@ -72,6 +72,13 @@ def check_inst_type(str0):
 		return i_type.get(opcode) + " " + registers.get(rs) + ", " + registers.get(rt) +  ", " + imm
 
 def convert(fname):
+	"""Puts everything together and prints out file parsed."""
 	l = convert_to_binary(read_file(fname))
 	for elem in l:
 		print(check_inst_type(elem))
+
+if len(sys.argv) == 1:
+	print("You specified 0 parameters! Run program as \n\tpython3 hex_mips.py <location of file to parse>")
+else:
+	print("Parsing file:", sys.argv[1], "\n")
+	convert(sys.argv[1])
