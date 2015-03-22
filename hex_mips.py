@@ -8,6 +8,7 @@ import sys
 
 # Dictionaries: Follows 32 bit MIPS format from Berkeley's MIPS Green Sheet
 # r_type_fx : R-Type Funct codes; i_type : I-Type Opcodes; j_type : J-Type Opcodes 
+
 r_type_fx = {32 : 'add', 8 : 'addu', 36 : 'and', 8 : 'jr', 39 : 'nor', 37 : 'or', 42 : 'slt', 43 : 'sltu', 0 : 'sll', 2 : 'srl', 34 : 'sub', 35 : 'subu'}
 i_type = {8 : 'addi', 9 : 'addiu', 12 : 'andi', 4 : 'beq', 5 : 'bne', 36 : 'lbu', 37 : 'lhu', 48 : 'll', 15 : 'lui', 35 : 'lw', 13 : 'ori', 10 : 'slti', 11 : 'sltiu', 40 : 'sb', 56 : 'sc', 41 : 'sh', 43 : 'sw'}
 j_type = {'j' : 2, 'jal' : 3}
@@ -16,6 +17,18 @@ registers = {0: '$0', 1 : '$at', 2 : '$v0', 3 : '$v1', 4 : '$a0', 5 : '$a1', 6 :
 def read_file(fname):
 	lines = open(fname).read().splitlines()
 	return lines
+
+def convert_to_signed(str0):
+	if str0[0] == '1':
+		str1 = ""
+		for letter in str0:
+			if letter == '1':
+				str1 += '0'
+			else:
+				str1 += '1'
+		num = -1 * (int(str1, 2) + 1)
+		return str(num)
+	return str(int(str0, 2))
 
 def convert_to_binary(list):
 	"""Converts hex line to binary, takes in a list of hex commands
@@ -58,6 +71,8 @@ def check_inst_type(str0):
 		rt = int(str0[6:11], 2)
 		rs = int(str0[11:16], 2)
 		imm = str(int(str0[16:32], 2))
+		if opcode == 4 or opcode == 5:
+			return i_type.get(opcode) + " " + registers.get(rs) + ", " + registers.get(rt) +  ", " + convert_to_signed(str0[16:32])
 		return i_type.get(opcode) + " " + registers.get(rs) + ", " + registers.get(rt) +  ", " + imm
 
 def convert(fname):
