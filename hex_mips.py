@@ -16,6 +16,8 @@ registers = {0: '$0', 1 : '$at', 2 : '$v0', 3 : '$v1', 4 : '$a0', 5 : '$a1', 6 :
 
 def read_file(fname):
 	lines = open(fname).read().splitlines()
+	if lines[0][0] == 'v':
+		return lines[1:]
 	return lines
 
 def convert_to_signed(str0):
