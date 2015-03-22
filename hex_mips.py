@@ -69,7 +69,9 @@ def check_inst_type(str0):
 		rt = int(str0[6:11], 2)
 		rs = int(str0[11:16], 2)
 		imm = str(int(str0[16:32], 2))
-		if opcode == 4 or opcode == 5 or opcode == 15 or opcode == 13:
+		if opcode == 15:
+			return i_type.get(opcode) + " " + registers.get(rs) + ", " + convert_to_signed(str0[16:32])
+		if opcode == 4 or opcode == 5 or opcode == 13:
 			return i_type.get(opcode) + " " + registers.get(rs) + ", " + registers.get(rt) +  ", " + convert_to_signed(str0[16:32])
 		return i_type.get(opcode) + " " + registers.get(rs) + ", " + registers.get(rt) +  ", " + imm
 
