@@ -9,7 +9,7 @@ import sys
 # Dictionaries: Follows 32 bit MIPS format from Berkeley's MIPS Green Sheet
 # r_type_fx : R-Type Funct codes; i_type : I-Type Opcodes; j_type : J-Type Opcodes 
 
-r_type_fx = {32 : 'add', 8 : 'addu', 36 : 'and', 8 : 'jr', 39 : 'nor', 37 : 'or', 42 : 'slt', 43 : 'sltu', 0 : 'sll', 2 : 'srl', 34 : 'sub', 35 : 'subu'}
+r_type_fx = {32 : 'add', 33 : 'addu', 36 : 'and', 8 : 'jr', 39 : 'nor', 37 : 'or', 42 : 'slt', 43 : 'sltu', 0 : 'sll', 2 : 'srl', 34 : 'sub', 35 : 'subu'}
 i_type = {8 : 'addi', 9 : 'addiu', 12 : 'andi', 4 : 'beq', 5 : 'bne', 36 : 'lbu', 37 : 'lhu', 48 : 'll', 15 : 'lui', 35 : 'lw', 13 : 'ori', 10 : 'slti', 11 : 'sltiu', 40 : 'sb', 56 : 'sc', 41 : 'sh', 43 : 'sw'}
 j_type = {'j' : 2, 'jal' : 3}
 registers = {0: '$0', 1 : '$at', 2 : '$v0', 3 : '$v1', 4 : '$a0', 5 : '$a1', 6 : '$a2', 7 : '$a3', 8 : '$t0', 9 : '$t1', 10 : '$t2', 11 : '$t3', 12 : '$t4', 13 : '$t5', 14 : '$t16', 15 : '$t17', 16: '$s0', 17 : '$s1', 18 : '$s2', 19 : '$s3', 20: '$s4', 21 : '$s5', 22 : '$s6', 23: '$s7', 24 : '$t8', 25 : '$t9', 26 : '$k0', 27 : '$k1', 28 : '$gp', 29 : '$sp', 30 : '$fp', 31 : '$ra'}
@@ -26,7 +26,7 @@ def convert_to_signed(str0):
 				str1 += '0'
 			else:
 				str1 += '1'
-		return = str(-1 * (int(str1, 2) + 1))
+		return str(-1 * (int(str1, 2) + 1))
 	return str(int(str0, 2))
 
 def convert_to_binary(list):
